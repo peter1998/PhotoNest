@@ -1,8 +1,13 @@
 import React, { Component } from "react";
+import NavBar from "./NavBar";
 
 class PhotosPage extends Component {
   render() {
-    return <div>photo</div>;
+    return (
+      <div>
+        <NavBar />
+      </div>
+    );
   }
 }
 
