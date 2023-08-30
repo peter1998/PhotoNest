@@ -1,0 +1,18 @@
+.photoListContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+
+.photoLink {
+  display: block;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  transition: background-color 0.3s;
+  text-decoration: none;
+  color: #333;
+}
+
+.photoLink:hover {
+  background-color: #f6f6f6;
+}
