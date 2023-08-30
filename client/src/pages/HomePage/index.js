@@ -9,7 +9,7 @@ class HomePage extends Component {
     return (
       <div>
         <NavBar />
-        {/* Display latest 10 photos as links */}
+
         <div>
           <h2>Latest Photos</h2>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((photo) => (
@@ -19,13 +19,11 @@ class HomePage extends Component {
           ))}
         </div>
 
-        {/* Registration Form */}
         <div>
           <h2>Register</h2>
           <RegistrationForm />
         </div>
 
-        {/* Login Form */}
         <div>
           <h2>Login</h2>
           <LoginForm />

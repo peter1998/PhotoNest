@@ -9,12 +9,8 @@ class UsersPage extends Component {
         <NavBar />
         <h2>Users</h2>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((user) => (
-          <div key={user}>
-            User {user}{" "}
-            {/* You can use Link here to direct to user's profile */}
-          </div>
+          <div key={user}>User {user} </div>
         ))}
-        {/* Pagination Logic Goes Here */}
       </div>
     );
   }

@@ -14,9 +14,9 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Mock API call
+
     console.log("Login data submitted:", loginData);
-    // Clear the form
+
     setLoginData({ email: "", password: "" });
   };
 

@@ -15,9 +15,9 @@ const RegistrationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Mock API call
+
     console.log("User data submitted:", userData);
-    // Clear the form
+
     setUserData({ username: "", email: "", password: "" });
   };
 

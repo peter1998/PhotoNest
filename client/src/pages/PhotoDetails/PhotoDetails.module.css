@@ -1,0 +1,44 @@
+.detailContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.photoImage {
+  max-width: 100%;
+  margin-bottom: 2rem;
+}
+
+.commentForm {
+  margin-top: 1rem;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.deleteButton {
+  background-color: #dc3545;
+  margin-top: 1rem;
+}
+
+.deleteButton:hover {
+  background-color: #c82333;
+}

@@ -1,22 +1,30 @@
 import React, { Component } from "react";
 import NavBar from "../../components/Navbar";
+import styles from "./PhotoDetails.module.css";
 
 class PhotoDetailPage extends Component {
   render() {
     return (
       <div>
         <NavBar />
-        <div>
+        <div className={styles.detailContainer}>
           <h2>Photo Details</h2>
-          {/* Display Photo */}
-          <img src="path_to_photo" alt="Photo" />
-          {/* Add Comment Form */}
-          <form>
-            <textarea placeholder="Add your comment..."></textarea>
-            <button type="submit">Add Comment</button>
+
+          <img className={styles.photoImage} src="path_to_photo" alt="Photo" />
+
+          <form className={styles.commentForm}>
+            <textarea
+              className={styles.textarea}
+              placeholder="Add your comment..."
+            ></textarea>
+            <button className={styles.button} type="submit">
+              Add Comment
+            </button>
           </form>
-          {/* Delete Photo Button */}
-          <button>Delete Photo</button>
+
+          <button className={`${styles.button} ${styles.deleteButton}`}>
+            Delete Photo
+          </button>
         </div>
       </div>
     );

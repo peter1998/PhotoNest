@@ -11,7 +11,6 @@ const PhotoList = () => {
           Photo {photo}
         </Link>
       ))}
-      {/* Pagination Logic Goes Here */}
     </div>
   );
 };
