@@ -1,16 +1,19 @@
 .adminNavBar {
   display: flex;
-  gap: 1rem;
+  justify-content: space-around;
+  padding: 1rem 0;
+  background-color: #f4f4f4;
 }
 
 .adminNavBar a {
-  padding: 0.5rem 1rem;
   text-decoration: none;
-  border: 1px solid #ddd;
+  color: #333;
+  padding: 0.5rem 1rem;
   border-radius: 4px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease;
 }
 
-.adminNavBar a:hover {
-  background-color: #f0f0f0;
+.adminNavBar a:hover,
+.adminNavBar a.active {
+  background-color: #ddd;
 }

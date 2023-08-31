@@ -1,13 +1,19 @@
 import React from "react";
 import styles from "./AdminNavBar.module.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const AdminNavBar = () => {
   return (
     <nav className={styles.adminNavBar}>
-      <Link to="/admin">Home</Link>
-      <Link to="/admin/photos">Photos</Link>
-      <Link to="/admin/users">Users</Link>
+      <NavLink to="/admin" activeClassName={styles.active}>
+        Home
+      </NavLink>
+      <NavLink to="/admin/photos" activeClassName={styles.active}>
+        Photos
+      </NavLink>
+      <NavLink to="/admin/users" activeClassName={styles.active}>
+        Users
+      </NavLink>
     </nav>
   );
 };
