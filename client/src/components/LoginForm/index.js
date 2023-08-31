@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./LoginForm.module.css";
+import UserContext from "../../context/UserContext"; // Adjust the path based on your directory structure
 
 const LoginForm = () => {
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
+
+  const { setUser } = useContext(UserContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,7 +18,15 @@ const LoginForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("Login data submitted:", loginData);
+    if (
+      loginData.email === "admin@example.com" &&
+      loginData.password === "admin"
+    ) {
+      setUser({ id: 1, name: "Admin", role: "admin" });
+      console.log("Admin logged in successfully");
+    } else {
+      console.error("Login failed");
+    }
 
     setLoginData({ email: "", password: "" });
   };
