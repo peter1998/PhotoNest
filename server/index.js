@@ -5,10 +5,15 @@ const cors = require("cors");
 const session = require("express-session");
 const path = require("path");
 
+const userRoutes = require("./routes/user");
+const profileRoutes = require("./routes/profile");
+const photoRoutes = require("./routes/photo");
+const contactRoutes = require("./routes/contact");
+const commentRoutes = require("./routes/comment");
+
 const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
-
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -19,6 +24,13 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+// Integrate routes
+app.use("/api/users", userRoutes);
+app.use("/api/profiles", profileRoutes);
+app.use("/api/photos", photoRoutes);
+app.use("/api/contacts", contactRoutes);
+app.use("/api/comments", commentRoutes);
 
 const PORT = 5000;
 
