@@ -1,5 +1,7 @@
 import React, { useState, useContext } from "react";
+import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
 import styles from "./LoginForm.module.css";
+import api from "../../services/api";
 import UserContext from "../../context/UserContext";
 
 const LoginForm = () => {
@@ -8,6 +10,10 @@ const LoginForm = () => {
     password: "",
   });
 
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [error, setError] = useState(null);
+
   const { setUser } = useContext(UserContext);
 
   const handleChange = (e) => {
@@ -15,40 +21,63 @@ const LoginForm = () => {
     setLoginData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    if (
-      loginData.email === "admin@example.com" &&
-      loginData.password === "admin"
-    ) {
-      setUser({ id: 1, name: "Admin", role: "admin" });
-      console.log("Admin logged in successfully");
-    } else {
-      console.error("Login failed");
+    try {
+      const response = await api.loginUser(loginData);
+
+      if (response.data.success && response.data.user) {
+        setUser(response.data.user);
+        setMessage("Logged in successfully!");
+        setError(null);
+      } else {
+        setError(response.data.message || "Login failed");
+      }
+    } catch (err) {
+      setError(err.response ? err.response.data.message : "An error occurred.");
+    } finally {
+      setLoading(false);
+      setLoginData({ email: "", password: "" });
     }
-
-    setLoginData({ email: "", password: "" });
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.loginForm}>
-      <input
-        type="email"
-        name="email"
-        value={loginData.email}
-        onChange={handleChange}
-        placeholder="Email Address"
-      />
-      <input
-        type="password"
-        name="password"
-        value={loginData.password}
-        onChange={handleChange}
-        placeholder="Password"
-      />
-      <button type="submit">Log in</button>
-    </form>
+    <Container>
+      <Row className="justify-content-md-center">
+        <Col xs={12} md={6}>
+          {message && <Alert variant="success">{message}</Alert>}
+          {error && <Alert variant="danger">{error}</Alert>}
+
+          <Form onSubmit={handleSubmit} className={styles.loginForm}>
+            <Form.Group>
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                value={loginData.email}
+                onChange={handleChange}
+                placeholder="Enter email"
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                value={loginData.password}
+                onChange={handleChange}
+                placeholder="Password"
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit" disabled={loading}>
+              {loading ? "Logging in..." : "Log in"}
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

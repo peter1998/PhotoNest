@@ -1,36 +1,50 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../../components/Navbar";
 import { Link } from "react-router-dom";
 import LoginForm from "../../components/LoginForm";
 import RegistrationForm from "../../components/RegistrationForm";
+import api from "../../services/api";
 
-class HomePage extends Component {
-  render() {
-    return (
-      <div>
-        <NavBar />
+const HomePage = () => {
+  const [latestPhotos, setLatestPhotos] = useState([]);
 
-        <div>
-          <h2>Latest Photos</h2>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((photo) => (
-            <Link to={`/photo/${photo}`} key={photo}>
-              Photo {photo}
-            </Link>
-          ))}
-        </div>
+  useEffect(() => {
+    const fetchLatestPhotos = async () => {
+      try {
+        const response = await api.getAllPhotos(); // Assuming this fetches all photos. You might need an endpoint to get the latest photos.
+        setLatestPhotos(response.data.slice(0, 10)); // Get only the last 10 photos
+      } catch (error) {
+        console.error("Error fetching the photos:", error);
+      }
+    };
 
-        <div>
-          <h2>Register</h2>
-          <RegistrationForm />
-        </div>
+    fetchLatestPhotos();
+  }, []);
 
-        <div>
-          <h2>Login</h2>
-          <LoginForm />
-        </div>
+  return (
+    <div className="home-container">
+      <NavBar />
+
+      <div className="latest-photos">
+        <h2>Latest Photos</h2>
+        {latestPhotos.map((photo) => (
+          <Link to={`/photo/${photo.id}`} key={photo.id}>
+            {photo.title}
+          </Link>
+        ))}
       </div>
-    );
-  }
-}
+
+      <div className="register-section">
+        <h2>Register</h2>
+        <RegistrationForm />
+      </div>
+
+      <div className="login-section">
+        <h2>Login</h2>
+        <LoginForm />
+      </div>
+    </div>
+  );
+};
 
 export default HomePage;
