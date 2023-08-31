@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import styles from "./LoginForm.module.css";
-import UserContext from "../../context/UserContext"; // Adjust the path based on your directory structure
+import UserContext from "../../context/UserContext";
 
 const LoginForm = () => {
   const [loginData, setLoginData] = useState({
