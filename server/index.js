@@ -5,11 +5,11 @@ const cors = require("cors");
 const session = require("express-session");
 const path = require("path");
 
-const userRoutes = require("./routes/user");
-const profileRoutes = require("./routes/profile");
-const photoRoutes = require("./routes/photo");
-const contactRoutes = require("./routes/contact");
-const commentRoutes = require("./routes/comment");
+const userRoutes = require("./routes/users");
+const profileRoutes = require("./routes/profiles");
+const photoRoutes = require("./routes/photos");
+const contactRoutes = require("./routes/contacts");
+const commentRoutes = require("./routes/comments");
 
 const app = express();
 

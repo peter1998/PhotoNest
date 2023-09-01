@@ -2,7 +2,7 @@ const User = require("../models/user");
 const Profile = require("../models/profile");
 const Photo = require("../models/photo");
 const Contact = require("../models/contact");
-const Comment = require("../models/comments");
+const Comment = require("../models/comment");
 
 module.exports = {
   addUser: async (userData) => {

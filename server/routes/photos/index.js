@@ -2,7 +2,10 @@ const express = require("express");
 const multer = require("multer");
 const router = express.Router();
 const { sendSuccess, sendError } = require("../../utils/responseHandlers");
-const { authenticate, adminOnly } = require("../../middleware/authMiddleware");
+const {
+  ensureAuthenticated: authenticate,
+  ensureAdmin: authorizeAdmin,
+} = require("../../middleware/authentication");
 const {
   uploadPhotoToDatabase,
   getAllPhotos,
@@ -59,7 +62,7 @@ router.delete("/:id", authenticate, async (req, res) => {
   }
 });
 
-router.get("/admin/all", [authenticate, adminOnly], async (req, res) => {
+router.get("/admin/all", [authenticate, authorizeAdmin], async (req, res) => {
   try {
     const photos = await getPhotosWithComments();
     sendSuccess(res, photos);

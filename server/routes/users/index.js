@@ -6,11 +6,13 @@ const {
   sendError,
   sendBadRequest,
 } = require("../../utils/responseHandlers");
-const { addUser, getUser } = require("../../utils/dbOperations");
+
+const { addUser, getUserById: getUser } = require("../../utils/dbOperations");
+
 const {
-  authenticate,
-  authorizeAdmin,
-} = require("../../middleware/authMiddleware");
+  ensureAuthenticated: authenticate,
+  ensureAdmin: authorizeAdmin,
+} = require("../../middleware/authentication");
 
 router.post("/register", async (req, res) => {
   try {
@@ -43,6 +45,15 @@ router.get("/logout", authenticate, (req, res) => {
   sendSuccess(res, null, "Logout successful!");
 });
 
+router.get("/all", [authenticate, authorizeAdmin], async (req, res) => {
+  try {
+    const users = await User.getAll();
+    sendSuccess(res, users);
+  } catch (err) {
+    sendError(res, err.message);
+  }
+});
+
 router.get("/:id", authenticate, async (req, res) => {
   try {
     const user = await getUser(req.params.id);
@@ -61,15 +72,6 @@ router.put("/:id/update", authenticate, async (req, res) => {
     const { username, password, email } = req.body;
     await User.updateUser(req.params.id, { username, password, email });
     sendSuccess(res, null, "User updated successfully!");
-  } catch (err) {
-    sendError(res, err.message);
-  }
-});
-
-router.get("/all", [authenticate, authorizeAdmin], async (req, res) => {
-  try {
-    const users = await User.getAll();
-    sendSuccess(res, users);
   } catch (err) {
     sendError(res, err.message);
   }

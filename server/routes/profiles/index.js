@@ -6,7 +6,9 @@ const {
   sendBadRequest,
 } = require("../../utils/responseHandlers");
 const Profile = require("../../models/profile");
-const { authenticate } = require("../../middleware/authMiddleware");
+const {
+  ensureAuthenticated: authenticate,
+} = require("../../middleware/authentication");
 
 router.put("/:userId", authenticate, async (req, res) => {
   try {

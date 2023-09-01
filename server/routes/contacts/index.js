@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { sendSuccess, sendError } = require("../../utils/responseHandlers");
-const { authenticate, adminOnly } = require("../../middleware/authMiddleware");
+const {
+  ensureAuthenticated: authenticate,
+  ensureAdmin: authorizeAdmin,
+} = require("../../middleware/authentication");
 const Contact = require("../../models/contact");
 
 router.post("/", async (req, res) => {
@@ -18,7 +21,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/admin/all", [authenticate, adminOnly], async (req, res) => {
+router.get("/admin/all", [authenticate, authorizeAdmin], async (req, res) => {
   try {
     const contactForms = await Contact.getAllMessages();
     sendSuccess(res, contactForms);

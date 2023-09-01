@@ -1,12 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const Comment = require("../../models/Comment");
+const Comment = require("../../models/comment");
 const {
   sendSuccess,
   sendError,
   sendBadRequest,
 } = require("../../utils/responseHandlers");
-const { authenticate } = require("../../middleware/authMiddleware");
+const {
+  ensureAuthenticated: authenticate,
+  ensureAdmin: authorizeAdmin,
+} = require("../../middleware/authentication");
 
 router.post("/:photoId", authenticate, async (req, res) => {
   try {
