@@ -17,7 +17,7 @@ class PhotoDetailPage extends Component {
 
   fetchPhotoDetails = async () => {
     try {
-      const photoId = this.props.match.params.id; // Assuming you're using react-router and ID is in the URL
+      const photoId = this.props.match.params.id;
       const response = await api.getPhoto(photoId);
       this.setState({ photo: response.data, isLoading: false });
     } catch (error) {
@@ -37,7 +37,7 @@ class PhotoDetailPage extends Component {
 
     try {
       await api.addComment(this.state.photo.id, { text: this.state.comment });
-      this.fetchPhotoDetails(); // To refresh comments after adding one
+      this.fetchPhotoDetails();
     } catch (error) {
       this.setState({ error: "Failed to add comment." });
     }
@@ -46,7 +46,6 @@ class PhotoDetailPage extends Component {
   handleDeletePhoto = async () => {
     try {
       await api.deletePhoto(this.state.photo.id);
-      // Redirect to photos page or handle the UI update after deleting the photo
     } catch (error) {
       this.setState({ error: "Failed to delete photo." });
     }

@@ -11,8 +11,8 @@ const HomePage = () => {
   useEffect(() => {
     const fetchLatestPhotos = async () => {
       try {
-        const response = await api.getAllPhotos(); // Assuming this fetches all photos. You might need an endpoint to get the latest photos.
-        setLatestPhotos(response.data.slice(0, 10)); // Get only the last 10 photos
+        const response = await api.getAllPhotos();
+        setLatestPhotos(response.data.slice(0, 10));
       } catch (error) {
         console.error("Error fetching the photos:", error);
       }

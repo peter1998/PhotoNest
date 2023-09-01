@@ -23,7 +23,7 @@ router.post("/register", async (req, res) => {
     const userId = await addUser({ username, password, email });
     sendSuccess(res, { userId: userId }, "User registered successfully!");
   } catch (err) {
-    sendError(res, err.message);
+    console.error("Error occurred:", err);
   }
 });
 
@@ -37,6 +37,7 @@ router.post("/login", async (req, res) => {
       sendBadRequest(res, "Invalid credentials");
     }
   } catch (err) {
+    console.error("Error occurred:", err);
     sendError(res, err.message);
   }
 });
@@ -50,6 +51,7 @@ router.get("/all", [authenticate, authorizeAdmin], async (req, res) => {
     const users = await User.getAll();
     sendSuccess(res, users);
   } catch (err) {
+    console.error("Error occurred:", err);
     sendError(res, err.message);
   }
 });
@@ -63,6 +65,7 @@ router.get("/:id", authenticate, async (req, res) => {
       sendError(res, "User not found", 404);
     }
   } catch (err) {
+    console.error("Error occurred:", err);
     sendError(res, err.message);
   }
 });
@@ -73,6 +76,7 @@ router.put("/:id/update", authenticate, async (req, res) => {
     await User.updateUser(req.params.id, { username, password, email });
     sendSuccess(res, null, "User updated successfully!");
   } catch (err) {
+    console.error("Error occurred:", err);
     sendError(res, err.message);
   }
 });
@@ -82,6 +86,7 @@ router.delete("/:id", [authenticate, authorizeAdmin], async (req, res) => {
     await User.deleteUser(req.params.id);
     sendSuccess(res, null, "User deleted successfully!");
   } catch (err) {
+    console.error("Error occurred:", err);
     sendError(res, err.message);
   }
 });

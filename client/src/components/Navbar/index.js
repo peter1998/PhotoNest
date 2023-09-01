@@ -7,30 +7,33 @@ const NavBar = () => {
     <nav className={styles.navContainer}>
       <NavLink
         to="/"
-        exact
-        activeClassName={styles.active}
-        className={styles.navLink}
+        className={({ isActive }) =>
+          isActive ? styles.active : styles.navLink
+        }
       >
         Home
       </NavLink>
       <NavLink
         to="/photo"
-        activeClassName={styles.active}
-        className={styles.navLink}
+        className={({ isActive }) =>
+          isActive ? styles.active : styles.navLink
+        }
       >
         Photos
       </NavLink>
       <NavLink
         to="/users"
-        activeClassName={styles.active}
-        className={styles.navLink}
+        className={({ isActive }) =>
+          isActive ? styles.active : styles.navLink
+        }
       >
         Users
       </NavLink>
       <NavLink
         to="/contacts"
-        activeClassName={styles.active}
-        className={styles.navLink}
+        className={({ isActive }) =>
+          isActive ? styles.active : styles.navLink
+        }
       >
         Contacts
       </NavLink>

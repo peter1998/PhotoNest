@@ -25,7 +25,6 @@ app.use(
   })
 );
 
-// Integrate routes
 app.use("/api/users", userRoutes);
 app.use("/api/profiles", profileRoutes);
 app.use("/api/photos", photoRoutes);
